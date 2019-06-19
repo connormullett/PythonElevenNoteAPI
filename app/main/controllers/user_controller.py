@@ -4,6 +4,7 @@ from flask_restplus import Resource
 
 from ..utils.dto import UserDto
 from ..services import user_service
+from ..utils.decorator import Authenticate
 
 api = UserDto.api
 _user = UserDto.user
@@ -14,6 +15,7 @@ class UserList(Resource):
 
     @api.doc('list_of_registered_users')
     @api.marshal_list_with(_user, envelope='data')
+    @Authenticate
     def get(self):
         return user_service.get_all_users()
     
