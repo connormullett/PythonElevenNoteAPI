@@ -3,6 +3,7 @@
 # Edit at https://www.gitignore.io/?templates=flask,python,visualstudiocode
 
 venv/
+migrations/
 
 ### Flask ###
 instance/*
