@@ -14,7 +14,7 @@ def create_user(data):
             email=data['email'],
             username=data['username'],
             password=data['password'],
-            registered_on=datetime.datetime.utcnow()
+            registered_on=datetime.utcnow()
         )
         save_changes(new_user)
         response_object = {
