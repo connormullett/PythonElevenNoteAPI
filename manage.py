@@ -6,8 +6,8 @@ import unittest
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 
-from elevennote.main import create_app, db
-from elevennote.main.models import user, black_list, note
+from elevennote.src import create_app, db
+from elevennote.src.models import user, black_list, note
 
 from elevennote import user_api
 

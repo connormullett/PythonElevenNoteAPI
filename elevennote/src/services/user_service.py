@@ -7,6 +7,13 @@ from elevennote.src.models.user import User
 
 
 def create_user(data):
+
+    if not data['password'] or not data['confirm_password']:
+        return {
+            'status': 'fail',
+            'message': 'password fields missing'
+        }, 400
+
     user = User.query.filter_by(email=data['email']).first()
     if not user:
         new_user = User(
@@ -14,7 +21,7 @@ def create_user(data):
             email=data['email'],
             username=data['username'],
             password=data['password'],
-            registered_on=datetime.utcnow()
+            registered_on=datetime.utcnow(),
         )
         save_changes(new_user)
         return generate_token(new_user)
@@ -32,6 +39,16 @@ def get_all_users():
 
 def get_a_user(public_id):
     return User.query.filter_by(public_id=public_id).first()
+
+
+def update_user(id, data):
+    user = get_a_user(id)
+    for key, item in data.items():
+        setattr(user, key, item)
+    user.modified_at = datetime.utcnow()
+    db.session.commit()
+    response = {'status': 'updated user'}
+    return response, 200
 
 
 def save_changes(data):

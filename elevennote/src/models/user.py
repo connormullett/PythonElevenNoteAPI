@@ -2,7 +2,7 @@
 import datetime
 import jwt
 
-from app.main.models.black_list import BlacklistToken
+from elevennote.src.models.black_list import BlacklistToken
 from ..config import key
 from .. import db, bcrypt
 
@@ -14,6 +14,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     email = db.Column(db.String(255), unique=True, nullable=False)
     registered_on = db.Column(db.DateTime, nullable=False)
+    modified_at = db.Column(db.DateTime, nullable=True)
     admin = db.Column(db.Boolean, nullable=False, default=False)
     public_id = db.Column(db.String(100), unique=True)
     username = db.Column(db.String(50), unique=True)
@@ -51,11 +52,6 @@ class User(db.Model):
     
     @staticmethod  
     def decode_auth_token(auth_token):
-        """
-        Decodes the auth token
-        :param auth_token:
-        :return: integer|string
-        """
         try:
             payload = jwt.decode(auth_token, key)
             is_blacklisted_token = BlacklistToken.check_blacklist(auth_token)
