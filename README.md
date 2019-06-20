@@ -23,8 +23,11 @@ When these steps are done you should be able to utilize the API in its entirety 
 Tokens are returned from `POST auth/login` and `POST /users/`. For authenticated routes, add header `Authorization: {token}`
 
 
-# SwaggerUI
+## SwaggerUI
 
 - Swagger UI is located at the base URL, defaults to `http://localhost:5000/`
 
-https://medium.com/free-code-camp/structuring-a-flask-restplus-web-service-for-production-builds-c2ec676de563
+
+## Demo used to build this example
+
+- https://medium.com/free-code-camp/structuring-a-flask-restplus-web-service-for-production-builds-c2ec676de563
