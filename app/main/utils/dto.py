@@ -20,9 +20,20 @@ class AuthDto:
     })
 
 
-class NoteDto:
+class NoteCreateDto:
     api = Namespace('note', description='notes')
     note = api.model('note', {
         'title': fields.String(required=True, description='title of note'),
         'content': fields.String(required=True, description='content of note')
+    })
+
+
+class NoteResponseDto:
+    api = NoteCreateDto.api
+    note_response = api.model('note', {
+        'title': fields.String(required=True, description='title'),
+        'content': fields.String(required=True, description='content of note'),
+        'owner_id': fields.String(required=True, description='id of owner'),
+        'created_at': fields.DateTime(description='when note was created'),
+        'modified_at': fields.DateTime(description='last revision of note')
     })

@@ -2,19 +2,20 @@
 from flask import request, g
 from flask_restplus import Resource
 
-from ..utils.dto import NoteDto
+from ..utils.dto import NoteCreateDto, NoteResponseDto
 from ..services import note_service
 from ..utils.decorator import Authenticate
 
-api = NoteDto.api
-_note = NoteDto.note
+api = NoteCreateDto.api
+_note = NoteCreateDto.note
+_note_response = NoteResponseDto.note_response
 
 
 @api.route('/')
 class NoteList(Resource):
 
     @api.doc('list_of_notes')
-    @api.marshal_list_with(_note, envelope='data')
+    @api.marshal_list_with(_note_response)
     @Authenticate
     def get(self):
         return note_service.get_all_notes()
