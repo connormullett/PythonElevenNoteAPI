@@ -2,8 +2,8 @@
 import uuid
 from datetime import datetime
 
-from app.main import db
-from app.main.models.user import User
+from elevennote.src import db
+from elevennote.src.models.user import User
 
 
 def create_user(data):

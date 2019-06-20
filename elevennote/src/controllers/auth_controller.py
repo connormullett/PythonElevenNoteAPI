@@ -2,7 +2,7 @@
 from flask import request
 from flask_restplus import Resource
 
-from app.main.services.auth_service import Auth
+from elevennote.src.services.auth_service import Auth
 from ..utils.dto import AuthDto
 
 api = AuthDto.api

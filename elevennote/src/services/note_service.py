@@ -1,8 +1,8 @@
 
 from datetime import datetime
 
-from app.main import db
-from app.main.models.note import Note
+from elevennote.src import db
+from elevennote.src.models.note import Note
 
 
 def create_note(data):

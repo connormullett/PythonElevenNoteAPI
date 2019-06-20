@@ -6,10 +6,10 @@ import unittest
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 
-from app.main import create_app, db
-from app.main.models import user, black_list, note
+from elevennote.main import create_app, db
+from elevennote.main.models import user, black_list, note
 
-from app import user_api
+from elevennote import user_api
 
 app = create_app(os.getenv('FLASK_ENV') or 'develop')
 app.register_blueprint(user_api)

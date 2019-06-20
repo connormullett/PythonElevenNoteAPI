@@ -2,7 +2,7 @@
 from functools import wraps
 from flask import request, g
 
-from app.main.services.auth_service import Auth
+from elevennote.src.services.auth_service import Auth
 
 
 def Authenticate(f):

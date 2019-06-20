@@ -1,5 +1,5 @@
 
-from app.main.models.user import User
+from elevennote.src.models.user import User
 from ..services.blacklist_service import save_token
 
 

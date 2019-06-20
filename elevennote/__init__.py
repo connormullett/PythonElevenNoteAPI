@@ -2,9 +2,9 @@
 from flask_restplus import Api
 from flask import Blueprint
 
-from .main.controllers.user_controller import api as user_ns
-from .main.controllers.auth_controller import api as auth_ns
-from .main.controllers.note_controller import api as note_ns
+from .src.controllers.user_controller import api as user_ns
+from .src.controllers.auth_controller import api as auth_ns
+from .src.controllers.note_controller import api as note_ns
 
 user_api = Blueprint('api', __name__)
 

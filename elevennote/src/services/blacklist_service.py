@@ -1,6 +1,6 @@
 
-from app.main import db
-from app.main.models.black_list import BlacklistToken
+from elevennote.src import db
+from elevennote.src.models.black_list import BlacklistToken
 
 
 def save_token(token):
