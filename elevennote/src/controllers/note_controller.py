@@ -16,7 +16,7 @@ note_update = NoteUpdateDto.note
 @api.route('/')
 class NoteList(Resource):
 
-    @api.doc('list_of_notes')
+    @api.doc('list of notes')
     @api.marshal_list_with(note)
     @Authenticate
     def get(self):
@@ -40,6 +40,7 @@ class Note(Resource):
 
     @api.doc('get note by ID')
     @api.marshal_with(note_detail)
+    @Authenticate
     def get(self, note_id):
         data = request.json
         return note_service.get_note_by_id(note_id)
@@ -65,16 +66,3 @@ class Note(Resource):
             api.abort(401)
 
         return note_service.delete_note(note_id)
-
-
-@api.route('/by_owner_id/<owner_id>')
-@api.param('note_id', 'owners public id')
-@api.response(404, 'owner id not found')
-class NoteByOwner(Resource):
-
-    @api.doc('get notes by owner id')
-    @api.marshal_list_with(note, envelope='data')
-    def get(self, owner_id):
-        notes = note_service.get_notes_by_owner_id(owner_id)
-        print(notes)
-        return notes, 200

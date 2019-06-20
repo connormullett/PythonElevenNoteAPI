@@ -8,15 +8,15 @@ class UserDto:  # List item
     api = Namespace('user', description='user related ops')
     user = api.model('user', {
         'username': fields.String(required=True, description='user username'),
-        'public_id': fields.String(description='user Identifier'),
+        'id': fields.Integer(required=True, description='users id')
     })
 
 
 class UserDetailDto:
     api = UserDto.api
     user = api.model('user_detail', {
+        'id': fields.Integer(description='user Identifier'),
         'username': fields.String(required=True, description='user username'),
-        'public_id': fields.String(description='user Identifier'),
         'registered_on': fields.DateTime(description='time of registration'),
         'modified_at': fields.DateTime(description='time of revision'),
     })
@@ -27,7 +27,7 @@ class UserMe:
     user = api.model('user_detail', {
         'email': fields.String(required=True, description='users email'),
         'username': fields.String(required=True, description='user username'),
-        'public_id': fields.String(description='user Identifier'),
+        'id': fields.Integer(description='user Identifier'),
         'registered_on': fields.DateTime(description='time of registration'),
         'modified_at': fields.DateTime(description='time of revision'),
     })
@@ -91,7 +91,7 @@ class NoteCreateDto:
     api = NoteDto.api
     note = api.model('note_create', {
         'title': fields.String(required=True, description='title of note'),
-        'content': fields.String(required=True, description='content of note')
+        'content': fields.String(required=True, description='content of note'),
     })
 
 

@@ -1,4 +1,6 @@
 
+from flask import g
+
 from datetime import datetime
 
 from elevennote.src import db
@@ -26,15 +28,15 @@ def create_note(data):
 
 
 def get_all_notes():
-    return Note.query.all()
+    notes = Note.query.filter_by(g.user.get('owner_id'))
+
+    if notes:
+        return notes
+    return {'status': 'no public notes found'}, 200
 
 
 def get_note_by_id(id):
-    return Note.query.filter_by(id=id).first()
-
-
-def get_notes_by_owner_id(owner_id):
-    return Note.query.filter_by(owner_id=owner_id).all()
+    return Note.query.filter_by(id=id, owner_id=g.user.get('owner_id')).first()
 
 
 def update_note(id, data):

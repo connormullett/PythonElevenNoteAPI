@@ -10,13 +10,13 @@ def Authenticate(f):
     def decorated(*args, **kwargs):
 
         data, status = Auth.get_logged_in_user(request)
-        print(data)
+        
         token = data.get('data')
 
         if not token:
             return data, status
 
-        g.user = {'owner_id': data['data']['public_id']}
+        g.user = {'owner_id': data['data']['user_id']}
         return f(*args, **kwargs)
 
     return decorated
