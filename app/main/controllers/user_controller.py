@@ -9,6 +9,8 @@ from ..utils.decorator import Authenticate
 api = UserDto.api
 _user = UserDto.user
 
+# TODO: User CRUD
+
 
 @api.route('/')
 class UserList(Resource):
@@ -18,14 +20,14 @@ class UserList(Resource):
     @Authenticate
     def get(self):
         return user_service.get_all_users()
-    
+
     @api.response(201, 'User created')
     @api.doc('create new user')
     @api.expect(_user, validate=True)
     def post(self):
         data = request.json
         return user_service.create_user(data=data)
-    
+
 
 @api.route('/<public_id>')
 @api.param('public_id', 'users public id')
