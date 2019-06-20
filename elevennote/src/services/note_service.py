@@ -28,15 +28,16 @@ def create_note(data):
 
 
 def get_all_notes():
-    notes = Note.query.filter_by(g.user.get('owner_id'))
-
-    if notes:
-        return notes
-    return {'status': 'no public notes found'}, 200
+    return Note.query.filter_by(owner_id=g.user.get('owner_id')).all()
 
 
 def get_note_by_id(id):
-    return Note.query.filter_by(id=id, owner_id=g.user.get('owner_id')).first()
+    note = Note.query.filter_by(id=id, owner_id=g.user.get('owner_id')).first()
+
+    if note:
+        return note
+    
+    return {'status': 'note not found'}, 404
 
 
 def update_note(id, data):

@@ -1,6 +1,7 @@
 
 from flask import request, g
 from flask_restplus import Resource
+from flask_restplus.marshalling import marshal
 
 from ..utils.dto import NoteCreateDto, NoteDto, NoteDetailDto, NoteUpdateDto
 from ..services import note_service
@@ -14,13 +15,17 @@ note_update = NoteUpdateDto.note
 
 
 @api.route('/')
+@api.response(404, 'no notes found')
 class NoteList(Resource):
 
     @api.doc('list of notes')
-    @api.marshal_list_with(note)
     @Authenticate
     def get(self):
-        return note_service.get_all_notes()
+        notes = note_service.get_all_notes()
+        print(len(notes))
+        if len(notes) == 0:
+            return {'status': 'no notes found'}, 404
+        return marshal(notes, note)
     
     @api.response(201, 'Note Created')
     @api.doc('create new note')
