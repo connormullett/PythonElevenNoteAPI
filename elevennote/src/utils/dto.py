@@ -57,7 +57,7 @@ class UserUpdateDto:
 
 class AuthDto:
     api = Namespace('auth', description='authentication')
-    user_auth = api.model('auth_details', {
+    user_auth = api.model('auth_login', {
         'email': fields.String(required=True, description='The email address'),
         'password': fields.String(required=True, description='The user password '),
     })
@@ -67,7 +67,7 @@ class AuthDto:
 
 class NoteDto:  # List Dto
     api = Namespace('note', description='notes')
-    note = api.model('note', {
+    note = api.model('note_list_item', {
         'id': fields.Integer(required=True, description='id of note'),
         'title': fields.String(required=True, description='title'),
         'owner_id': fields.String(required=True, description='id of owner'),
@@ -89,7 +89,7 @@ class NoteDetailDto:
 
 class NoteCreateDto:
     api = NoteDto.api
-    note = api.model('note', {
+    note = api.model('note_create', {
         'title': fields.String(required=True, description='title of note'),
         'content': fields.String(required=True, description='content of note')
     })
@@ -97,7 +97,7 @@ class NoteCreateDto:
 
 class NoteUpdateDto:
     api = NoteDto.api
-    note = api.model('note', {
+    note = api.model('note_update', {
         'title': fields.String(required=True, description='title of note'),
         'content': fields.String(required=True, description='content of note')
     })

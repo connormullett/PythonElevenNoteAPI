@@ -6,7 +6,7 @@ from ..utils.dto import NoteCreateDto, NoteDto, NoteDetailDto, NoteUpdateDto
 from ..services import note_service
 from ..utils.decorator import Authenticate
 
-api = NoteCreateDto.api
+api = NoteDto.api
 note = NoteDto.note
 note_create = NoteCreateDto.note
 note_detail = NoteDetailDto.note
