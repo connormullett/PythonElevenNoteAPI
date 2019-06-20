@@ -2,7 +2,7 @@
 from flask import request, g
 from flask_restplus import Resource
 
-from ..utils.dto import UserDto, UserCreateDto, UserDetailDto, UserUpdateDto
+from ..utils.dto import UserDto, UserCreateDto, UserDetailDto, UserUpdateDto, UserMe
 from ..services import user_service
 from ..utils.decorator import Authenticate
 
@@ -11,6 +11,7 @@ user = UserDto.user
 user_create = UserCreateDto.user
 user_detail = UserDetailDto.user
 user_update = UserUpdateDto.user
+user_me = UserMe.user
 
 # TODO: User CRUD
 
@@ -58,8 +59,14 @@ class UserMe(Resource):
         return user_service.update_user(user_id, data)
 
     @api.doc('get account associated with token')
-    @api.marshal_with(user_detail)
+    @api.marshal_with(user_me)
     @Authenticate
     def get(self):
         user_id = g.user.get('owner_id')
         return user_service.get_a_user(user_id)
+
+    @api.doc('delete account')
+    @Authenticate
+    def delete(self):
+        user_id = g.user.get('owner_id')
+        return user_service.delete_user(user_id)

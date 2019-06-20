@@ -14,6 +14,7 @@ def create_note(data):
         created_at=datetime.utcnow(),
         modified_at=datetime.utcnow()
     )
+
     save_changes(new_note)
 
     response_object = {
@@ -33,7 +34,30 @@ def get_note_by_id(id):
 
 
 def get_notes_by_owner_id(owner_id):
-    return Note.query.filter_by(owner_id=owner_id)
+    return Note.query.filter_by(owner_id=owner_id).all()
+
+
+def update_note(id, data):
+    note = get_note_by_id(id)
+    if note:
+        for key, item in data.items():
+                setattr(note, key, item)
+        note.modified_at = datetime.utcnow()
+        db.session.commit()
+        return Note.query.get(id), 200
+    else:
+        return {'status': 'note not found'}, 404
+
+
+def delete_note(id):
+    note = get_note_by_id(id)
+
+    if note:
+        db.session.delete(note)
+        db.session.commit()
+        return {'status': 'no content'}, 204
+    else:
+        return {'status': 'note not found'}, 404
 
 
 def save_changes(data):

@@ -37,14 +37,10 @@ class Auth:
     @staticmethod
     def logout_user(data):
         if data:
-            auth_token = data.split(" ")[1]
-        else:
-            auth_token = ''
-        if auth_token:
-            resp = User.decode_auth_token(auth_token)
+            resp = User.decode_auth_token(data)
             if not isinstance(resp, str):
                 # mark the token as blacklisted
-                return save_token(token=auth_token)
+                return save_token(token=data)
             else:
                 response_object = {
                     'status': 'fail',

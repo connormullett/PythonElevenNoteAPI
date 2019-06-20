@@ -63,24 +63,41 @@ class AuthDto:
     })
 
 
-
 ### NOTES DTOS ###
 
+class NoteDto:  # List Dto
+    api = Namespace('note', description='notes')
+    note = api.model('note', {
+        'id': fields.Integer(required=True, description='id of note'),
+        'title': fields.String(required=True, description='title'),
+        'owner_id': fields.String(required=True, description='id of owner'),
+        'created_at': fields.DateTime(required=True, description='when note was created')
+    })
+
+
+class NoteDetailDto:
+    api = NoteDto.api
+    note = api.model('note_detail', {
+        'id': fields.Integer(required=True, description='id of note'),
+        'title': fields.String(required=True, description='title'),
+        'content': fields.String(required=True, description='content of note'),
+        'owner_id': fields.String(required=True, description='id of owner'),
+        'created_at': fields.DateTime(description='when note was created'),
+        'modified_at': fields.DateTime(description='last revision of note')
+    })
+    
 
 class NoteCreateDto:
-    api = Namespace('note', description='notes')
+    api = NoteDto.api
     note = api.model('note', {
         'title': fields.String(required=True, description='title of note'),
         'content': fields.String(required=True, description='content of note')
     })
 
 
-class NoteResponseDto:
-    api = NoteCreateDto.api
-    note_response = api.model('note', {
-        'title': fields.String(required=True, description='title'),
-        'content': fields.String(required=True, description='content of note'),
-        'owner_id': fields.String(required=True, description='id of owner'),
-        'created_at': fields.DateTime(description='when note was created'),
-        'modified_at': fields.DateTime(description='last revision of note')
+class NoteUpdateDto:
+    api = NoteDto.api
+    note = api.model('note', {
+        'title': fields.String(required=True, description='title of note'),
+        'content': fields.String(required=True, description='content of note')
     })

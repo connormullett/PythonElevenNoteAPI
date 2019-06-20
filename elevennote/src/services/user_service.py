@@ -51,6 +51,13 @@ def update_user(id, data):
     return response, 200
 
 
+def delete_user(id):
+    user = User.query.filter_by(public_id=id).first()
+    db.session.delete(user)
+    db.session.commit()
+    return None, 204
+
+
 def save_changes(data):
     db.session.add(data)
     db.session.commit()
