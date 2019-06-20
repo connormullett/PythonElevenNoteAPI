@@ -1,6 +1,6 @@
 
 from functools import wraps
-from flask import request
+from flask import request, g
 
 from app.main.services.auth_service import Auth
 
@@ -10,11 +10,13 @@ def Authenticate(f):
     def decorated(*args, **kwargs):
 
         data, status = Auth.get_logged_in_user(request)
+        print(data)
         token = data.get('data')
 
         if not token:
             return data, status
 
+        g.user = {'owner_id': data['data']['public_id']}
         return f(*args, **kwargs)
 
     return decorated

@@ -9,7 +9,7 @@ from .. import db, bcrypt
 
 class User(db.Model):
 
-    __tablename__ = 'user'
+    __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     email = db.Column(db.String(255), unique=True, nullable=False)
@@ -18,6 +18,9 @@ class User(db.Model):
     public_id = db.Column(db.String(100), unique=True)
     username = db.Column(db.String(50), unique=True)
     password_hash = db.Column(db.String(100))
+    notes = db.relationship('Note', backref='user', 
+        cascade='all, delete', lazy=True
+    )
 
     @property
     def password(self):

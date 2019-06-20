@@ -18,3 +18,11 @@ class AuthDto:
         'email': fields.String(required=True, description='The email address'),
         'password': fields.String(required=True, description='The user password '),
     })
+
+
+class NoteDto:
+    api = Namespace('note', description='notes')
+    note = api.model('note', {
+        'title': fields.String(required=True, description='title of note'),
+        'content': fields.String(required=True, description='content of note')
+    })
