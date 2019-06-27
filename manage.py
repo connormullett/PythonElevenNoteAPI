@@ -11,7 +11,7 @@ from elevennote.src.models import user, black_list, note
 
 from elevennote import user_api
 
-app = create_app(os.getenv('FLASK_ENV') or 'develop')
+app = create_app(os.getenv('FLASK_ENV'))
 app.register_blueprint(user_api)
 
 app.app_context().push()

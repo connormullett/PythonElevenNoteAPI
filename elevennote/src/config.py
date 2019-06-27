@@ -30,9 +30,9 @@ class Production(Config):
 
 
 app_config = dict(
-    develop=Development,
+    development=Development,
     testing=Testing,
-    production=Production 
+    production=Production
 )
 
 key = Config.SECRET_KEY
