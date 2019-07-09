@@ -1,9 +1,6 @@
 
 from flask_restplus import Namespace, fields
 
-
-### USER DTO'S ###
-
 class UserDto:  # List item
     api = Namespace('user', description='user related ops')
     user = api.model('user', {
@@ -11,42 +8,35 @@ class UserDto:  # List item
         'id': fields.Integer(required=True, description='users id')
     })
 
-
 class UserDetailDto:
-    api = UserDto.api
-    user = api.model('user_detail', {
+    user = UserDto.api.model('user_detail', {
         'id': fields.Integer(description='user Identifier'),
         'username': fields.String(required=True, description='user username'),
         'registered_on': fields.DateTime(description='time of registration'),
         'modified_at': fields.DateTime(description='time of revision'),
     })
 
-
 class UserMe:
-    api = UserDto.api
-    user = api.model('user_detail', {
+    user = UserDto.api.model('user_detail', {
         'email': fields.String(required=True, description='users email'),
         'username': fields.String(required=True, description='user username'),
         'id': fields.Integer(description='user Identifier'),
         'registered_on': fields.DateTime(description='time of registration'),
         'modified_at': fields.DateTime(description='time of revision'),
     })
-    
-
 
 class UserCreateDto:
-    api = UserDto.api
-    user = api.model('user_create', {
-        'email': fields.String(required=True, description='user email address'),
+    user = UserDto.api.model('user_create', {
+        'email': fields.String(required=True,
+            description='user email address'),
         'username': fields.String(required=True, description='user username'),
         'password': fields.String(required=True, description='user password'),
-        'confirm_password': fields.String(required=True, description='users confirmation of password')
+        'confirm_password': fields.String(required=True,
+            description='users confirmation of password')
     })
 
-
 class UserUpdateDto:
-    api = UserDto.api
-    user = api.model('user_update', {
+    user = UserDto.api.model('user_update', {
         'email': fields.String(required=True, description='user email address'),
         'username': fields.String(required=True, description='user username'),
     })
@@ -85,7 +75,7 @@ class NoteDetailDto:
         'created_at': fields.DateTime(description='when note was created'),
         'modified_at': fields.DateTime(description='last revision of note')
     })
-    
+
 
 class NoteCreateDto:
     api = NoteDto.api
